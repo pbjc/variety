@@ -60,7 +60,7 @@ class LinkCount(Feature):
     @staticmethod
     def count_links(comment):
         soup = BeautifulSoup(comment.body_html, 'html.parser')
-        return sum(1 for _ in soup.findAll('a'))
+        len(soup.findAll('a'))
 
     def score_comments(self, comments):
         weights = self.weight_by_upvotes(comments)
