@@ -7,8 +7,8 @@ class Feature(object):
     def weight_by_upvotes(comments):
         '''Gives comments and weights by relative number of upvotes, i.e.
         score / sum.'''
-        total = sum(comment.score for comment in comments)
-        return (comment.score / total for comment in comments)
+        total = sum(comment.score for comment in comments if comment.score > 0)
+        return (max(0, comment.score / total) for comment in comments)
 
     @staticmethod
     def weighted_comment_score(weights, comments, score_comment):
@@ -19,10 +19,10 @@ class Feature(object):
     def sigmoid(x, low=-1, high=1):
         '''Applies a sigmoid to values bounded in a given range to "boost"
         values closer to the center of the range'''
-        delta = (high - low) / 2
+        height = high - low
+        amplitude = height / 2
         center = (high + low) / 2
-        _sigmoid = lambda x: x / (1 + abs(x))
-        return _sigmoid(x - center) * (delta / _sigmoid(delta)) + center
+        return height / (1 + math.exp(-4 * (x - center))) - (amplitude - center)
 
     def score_submission(self, submission):
         submission.comments.replace_more(limit=0)
@@ -60,7 +60,7 @@ class LinkCount(Feature):
     @staticmethod
     def count_links(comment):
         soup = BeautifulSoup(comment.body_html, 'html.parser')
-        len(soup.findAll('a'))
+        return len(soup.findAll('a'))
 
     def score_comments(self, comments):
         weights = self.weight_by_upvotes(comments)
