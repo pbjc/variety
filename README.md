@@ -17,10 +17,24 @@ the feature, we will combine these features in an intelligent way to produce a
 single score. A machine learning approach to this will require datasets labeled
 for content diversity. If you've got one on hand, please share it with us ;).
 
-Usage
+Setup and Usage
 -----
+You'll need a Reddit client ID and client secret to use the API. Follow the
+steps here to generate one:
+<https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example#first-steps>
+
+Once you've got them, create a file called `secrets.py` with the following
+contents:
+
+```python3
+client_id = 'my client id'
+client_secret = 'my client secret'
+```
+
+Then install the requirements using pip and you're all set!
+
 ```bash
-$ pip3 install -r requirements.text
+$ sudo pip3 install -r requirements.txt
 $ python3 main.py <Reddit submission url>
 ```
 
