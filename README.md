@@ -26,13 +26,13 @@ $ python3 main.py <Reddit submission url>
 
 Features
 --------
-*Polarity*: how negative or positive comments are. Range: [-1, 1].
+**Polarity**: how negative or positive comments are. Range: [-1, 1].
 
-*Subjectivity*: how objective or subjective comments are. Range: [0, 1].
+**Subjectivity**: how objective or subjective comments are. Range: [0, 1].
 
-*Link count*: how many links comments contain.
+**Link count**: how many links comments contain.
 
-*Comment length*: how many words comments contain.
+**Comment length**: how many words comments contain.
 
 To compute scores for an entire comment thread, each comment is scored in
 isolation and weighted by its relative number of upvotes.
